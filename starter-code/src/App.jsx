@@ -11,6 +11,7 @@ class App extends Component {
     this.addRandom = this.addRandom.bind(this);
     this.sortName = this.sortName.bind(this);
     this.sortPopularity = this.sortPopularity.bind(this);
+    this.deleteContact = this.deleteContact.bind(this);
   }
 
   makeRow(contact, key) {
@@ -21,6 +22,15 @@ class App extends Component {
         </td>
         <td>{contact.name}</td>
         <td>{contact.popularity.toFixed(2)}</td>
+        <td>
+          <button
+            onClick={() => {
+              this.deleteContact(key);
+            }}
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     );
   }
@@ -56,6 +66,12 @@ class App extends Component {
     this.setState({ contacts: newArray });
   }
 
+  deleteContact(key) {
+    const newArray = this.state.contacts.slice();
+    newArray.splice(key, 1);
+    this.setState({ contacts: newArray });
+  }
+
   render() {
     return (
       <div className="App">
@@ -71,6 +87,7 @@ class App extends Component {
               <th>Picture</th>
               <th>Name</th>
               <th>Popularity</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
